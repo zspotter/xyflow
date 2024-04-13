@@ -37,6 +37,34 @@ export const calcAutoPan = (pos: XYPosition, bounds: Dimensions): number[] => {
   return [xMovement, yMovement];
 };
 
+const lerp = (a: number, b: number, pct: number): number => {
+  return a + (b - a) * pct;
+};
+
+const easeOutCubic = (pct: number): number => {
+  return 1 - Math.pow(1 - pct, 3);
+};
+
+export const snap = (raw: XYPosition, grid: [number, number]): XYPosition => {
+  return {
+    x: grid[0] * Math.round(raw.x / grid[0]),
+    y: grid[1] * Math.round(raw.y / grid[1]),
+  };
+};
+
+export const smoothSnap = (raw: XYPosition, grid: [number, number], smoothness: number): XYPosition => {
+  // Typical snapped position
+  const snapped = snap(raw, grid);
+  // Relative distance between snapped (0) and raw (1) positions
+  const dx = Math.abs(raw.x - snapped.x) / (0.5 * grid[0]);
+  const dy = Math.abs(raw.y - snapped.y) / (0.5 * grid[1]);
+
+  return {
+    x: lerp(raw.x, snapped.x, smoothness * easeOutCubic(dx)),
+    y: lerp(raw.y, snapped.y, smoothness * easeOutCubic(dy)),
+  }
+};
+
 export const getHostForElement = (element: HTMLElement): Document | ShadowRoot =>
   (element.getRootNode?.() as Document | ShadowRoot) || window?.document;
 

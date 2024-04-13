@@ -7,7 +7,7 @@ import { useStoreApi } from '../../hooks/useStore';
 import { getDragItems, getEventHandlerParams, hasSelector, calcNextPosition } from './utils';
 import { handleNodeClick } from '../../components/Nodes/utils';
 import useGetPointerPosition from '../useGetPointerPosition';
-import { calcAutoPan, getEventPosition, rectToBox } from '../../utils';
+import { calcAutoPan, getEventPosition, snap, rectToBox, smoothSnap } from '../../utils';
 import type {
   NodeDragItem,
   Node,
@@ -61,7 +61,7 @@ function useDrag({
     if (nodeRef?.current) {
       const selection = select(nodeRef.current);
 
-      const updateNodes = ({ x, y }: XYPosition) => {
+      const updateNodes = ({ x, y }: XYPosition, hard: boolean = false) => {
         const {
           nodeInternals,
           onNodeDrag,
@@ -88,8 +88,11 @@ function useDrag({
           const nextPosition = { x: x - n.distance.x, y: y - n.distance.y };
 
           if (snapToGrid) {
-            nextPosition.x = snapGrid[0] * Math.round(nextPosition.x / snapGrid[0]);
-            nextPosition.y = snapGrid[1] * Math.round(nextPosition.y / snapGrid[1]);
+            const snapped = hard
+              ? snap(nextPosition, snapGrid)
+              : smoothSnap(nextPosition, snapGrid, 0.5);
+            nextPosition.x = snapped.x;
+            nextPosition.y = snapped.y;
           }
 
           // if there is selection with multiple nodes and a node extent is set, we need to adjust the node extent for each node
@@ -257,6 +260,7 @@ function useDrag({
               const { updateNodePositions, nodeInternals, onNodeDragStop, onSelectionDragStop } = store.getState();
               const onStop = nodeId ? onNodeDragStop : wrapSelectionDragFunc(onSelectionDragStop);
 
+              updateNodes(lastPos.current!, true); // Hard snap on drop
               updateNodePositions(dragItems.current, false, false);
 
               if (onStop) {
