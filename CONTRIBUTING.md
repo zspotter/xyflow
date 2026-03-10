@@ -1,4 +1,4 @@
-# Contributing to React Flow
+# Contributing to React Flow:
 
 Hello there! So glad you want to help out with React Flow and Svelte Flow 🤗 You’re the best. Here’s a guide for how you can contribute to the project.
 
@@ -6,9 +6,12 @@ Hello there! So glad you want to help out with React Flow and Svelte Flow 🤗 
 
 Just recently we renamed our organization and repository of React Flow to "xyflow". Now you can not only find the source code of React Flow but also of Svelte Flow in this repository. We are in a state of transition. This is the current structure:
 
-* React Flow `reactflow` version v11 is on branch v11
-* Svelte Flow `@xyflow/svelte` can be found under [packages/svelte](./packages/svelte)
-* React Flow v12 (not published yet) can be found under [packages/react](./packages/react)
+-   React Flow `reactflow` version v11 is on branch v11
+    
+-   Svelte Flow `@xyflow/svelte` can be found under [packages/svelte](./packages/svelte)
+    
+-   React Flow v12 (not published yet) can be found under [packages/react](./packages/react)
+    
 
 # Our Contributing Philosophy
 
@@ -26,7 +29,7 @@ The things we need the most help for the library and its community are:
 
 🎬 **Create tutorials**. Send them to us and we’ll happily share them!
 
-**✏️ Edit our [Docs](https://reactflow.dev/docs/introduction/)**: Make changes in the [react-flow-docs repo](https://github.com/wbkd/react-flow-docs), or click the "edit this page” button that lives on every doc site.
+**✏️ Edit our** [**Docs**](https://reactflow.dev/docs/introduction/): Make changes in the [react-flow-docs repo](https://github.com/wbkd/react-flow-docs), or click the "edit this page” button that lives on every doc site.
 
 All interactions should be done with care following our [Code of Conduct](https://github.com/wbkd/react-flow/blob/main/CODE_OF_CONDUCT.md).
 
@@ -38,15 +41,17 @@ Talking to us first about the enhancement you want to build will be the most lik
 
 ### Contact us
 
-To ask about a possible enhancement, email us at info@reactflow.dev
-
+To ask about a possible enhancement, email us at [info@reactflow.dev](mailto:info@reactflow.dev)
 
 ### 💫 Pull Requests
 
 If you want to contribute improvements or new features we are happy to review your PR :)  
 Please use a meaningful commit message and add a little description of your changes.
 
-1. Install dependencies `pnpm install` 
-2. Start dev server `pnpm dev` 
-3. Test your changes with the existing examples or add a new one if it's needed for your changes
-4. Run tests `pnpm test` and add new new tests if you are introducing a new feature
+1.  Install dependencies `pnpm install`
+    
+2.  Start dev server `pnpm dev`
+    
+3.  Test your changes with the existing examples or add a new one if it's needed for your changes
+    
+4.  Run tests `pnpm test` and add new new tests if you are introducing a new feature
